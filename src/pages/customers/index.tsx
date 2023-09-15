@@ -8,12 +8,15 @@ function Customer() {
       .then((data) => setCustomers(data));
   }, []);
   async function addCustomer() {
-    const name = await document.getElementById("name").value;
-    const email = await document.getElementById("email").value;
-    const contact_number = await document.getElementById("contact_number")
-      .value;
-    const customer_type = await document.getElementById("customer_type").value;
-    const address = await document.getElementById("address").value;
+    const name = await (document as any).getElementById("name").value;
+    const email = await (document as any).getElementById("email").value;
+    const contact_number = await (document as any).getElementById(
+      "contact_number"
+    ).value;
+    const customer_type = await (document as any).getElementById(
+      "customer_type"
+    ).value;
+    const address = await (document as any).getElementById("address").value;
     fetch("http://localhost:8080/customers/", {
       method: "POST",
       headers: {
@@ -28,6 +31,30 @@ function Customer() {
       }),
     });
   }
+  // async function updateCustomer() {
+  //   const name = await (document as any).getElementById("name").value;
+  //   const email = await (document as any).getElementById("email").value;
+  //   const contact_number = await (document as any).getElementById(
+  //     "contact_number"
+  //   ).value;
+  //   const customer_type = await (document as any).getElementById(
+  //     "customer_type"
+  //   ).value;
+  //   const address = await (document as any).getElementById("address").value;
+  //   fetch("http://localhost:8080/customers/:id", {
+  //     method: "Patch",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       name: name,
+  //       email: email,
+  //       contact_number: contact_number,
+  //       customer_type: parseInt(customer_type),
+  //       address: address,
+  //     }),
+  //   });
+  // }
   return (
     <>
       <form className="flex-col m-8   gap-2  text-gray-600">
@@ -79,6 +106,13 @@ function Customer() {
         >
           Add Customer
         </button>
+        {/* <button
+          className="button bg-blue-500 m-2"
+          type="button"
+          onClick={() => updateCustomer().then(() => window.location.reload())}
+        >
+          Update Customer
+        </button> */}
       </form>
       <div>
         <h1 className="text-5xl font-bold p-2 m-10">Customers</h1>
